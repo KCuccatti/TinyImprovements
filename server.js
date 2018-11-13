@@ -10,8 +10,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-mongoose.connect('mongodb://localhost/kudos_db', { useNewUrlParser: true });
-
+//mongoose.connect('mongodb://localhost/kudos_db', { useNewUrlParser: true });
 
 require('./routes/api-routes')(app);
 
