@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Give Kudos</title>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+</head>
+
+<body>
+
+  <div class="w3-center intro">
+    <h1>Give kudos to other employees!</h1>
+    <h3>Start by logging in:</h3>
+    <button class="login">Login / Sign Up</button>
+  </div>
+
+  <div class="welcome w3-center"></div>
+
+  <div class="w3-center">
+    <button class="btnGiveKudos w3-blue w3-hover-green">Give Kudos</button>
+  </div>
+
+  <div class="w3-center kudosDiv"></div>
+
+
+  <div id="loginDiv" class="modal">
+
+    <div class="w3-modal-content">
+      <div class="imgcontainer">
+        <span class="close" title="Close Modal">&times;</span>
+        <img src="./image/TekSystemsLogo.png" alt="TekLogo" class="logo">
+      </div>
+
+      <div class="w3-container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" id="uname" name="uname" value="Kyle">
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="psw" name="psw" value="password123">
+        <div class="errMsg"></div>
+        <button id="btnLogin">Login</button>
+        <button id="btnSignUp">Sign Up</button>
+      </div>
+
+      <div class="w3-container" id="loginFooter">
+        <button id="btnCancel" class="cancelbtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="giveKudosDiv" class="modal2">
+
+    <div class="w3-modal-content">
+      <div class="imgcontainer">
+        <span class="close" title="Close Modal">&times;</span>
+        <img src="./image/TekSystemsLogo.png" alt="TekLogo" class="logo">
+      </div>
+
+      <div class="w3-container">
+        <h2>Give a Kudo</h2>
+        <input class='form-control' type="text" id="kudo-title" placeholder="Title" />
+        <textarea class='form-control' type="text" id="kudo-body" rows="5" cols="96" placeholder="Message!"></textarea>
+        
+        <div class="receiverDiv"></div>
+        
+        <button id="btnGiveKudo2">Give Kudo</button>
+      </div>
+
+      <div class="w3-container" id="loginFooter2">
+        <button id="btnCancel2" class="cancelbtn">Cancel</button>
+        <!--<span class="psw">Forgot <a href="#">password?</a></span>-->
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+
+</html>
