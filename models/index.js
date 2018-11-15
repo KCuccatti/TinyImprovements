@@ -1,5 +1,5 @@
 "use strict";
-var dotenv = require('dotenv').config()
+var dotenv = require('dotenv').config();
 var fs = require("fs");
 var path = require("path");
 var basename = path.basename(module.filename);
@@ -23,12 +23,15 @@ if (env==="production") {
   console.log("Database: " + process.env.MONGO_PROD_DBNAME);
   console.log("Host: " + process.env.MONGO_PROD_HOST);
   console.log("THE DATABSE: " + config.database);
+
   var dbUrl = 'mongodb://' + process.env.MONGO_PROD_USER +":" + process.env.MONGO_PROD_KEY + "@" + 
   process.env.MONGO_PROD_HOST + "/" + process.env.MONGO_PROD_DBNAME + "?authSource=yourDB&w=1";
   console.log(dbUrl);
-  mongoose.connect(dbUrl, { useNewUrlParser: true });
 
+  mongoose.connect(dbUrl, { useNewUrlParser: true });
+  
 } else {
+  console.log("Using DEV stuff");
   console.log("Using Environment Variables");
   console.log("Database: " + process.env.MYSQL_DEV_DBNAME);
   console.log("Host: " + process.env.MYSQL_DEV_HOST);
