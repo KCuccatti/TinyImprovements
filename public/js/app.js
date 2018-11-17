@@ -52,6 +52,9 @@ $('#btnGiveKudo2').on('click', function () {
     kudoRecipient = $('.receiver').find('option:selected').val();
     $.when(ajaxGiveKudos().done(function(a1) {
         $('.modal2').hide();
+        $.when(ajaxGetKudos().done(function(a2) {
+            $('.kudosDiv').html(theKudosHtml);
+        }))
     }))
 })
 
@@ -93,11 +96,12 @@ $('#btnSignUp').on('click', function () {
                 psw = $('#psw').val();
                 $.when(ajaxSignup()).done(function (a2) {
                     $.when(ajaxGetKudos().done(function(a3) {
-                        alert('hello');
                         $('.welcome').html(welcomeHtml);
                         $('.modal').hide();
                         $('.intro').hide();
                         $('.welcome').show();
+                        $('.loginReturn').show();
+                        $('.btnGiveKudos').show();
                         $('.kudosDiv').html(theKudosHtml);
                     }))
                 })
