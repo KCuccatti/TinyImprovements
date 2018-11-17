@@ -8,6 +8,8 @@ var theKudosHtml = '';
 var userHtml = '';
 var loggedInUserId = '';
 
+$('.loginReturn').hide();
+
 $('.login').on('click', function () {
     $('.modal').show();
 })
@@ -20,8 +22,8 @@ $('.close').on('click', function () {
     $('.modal, .modal2').hide();
 })
 
-$('$loginReturn').on('click', function() {
-    
+$('.loginReturn').on('click', function() {
+    $('.modal').show();
 })
 
 
@@ -29,9 +31,7 @@ $('.btnGiveKudos').on('click', function () {
     $.when(ajaxGetUsers().done(function (a1) {
         $('.receiverDiv').html(userHtml);
     }));
-
     $('.modal2').show();
-    
 })
 
 $('#btnGiveKudo2').on('click', function () {
@@ -41,6 +41,7 @@ $('#btnGiveKudo2').on('click', function () {
     console.log(kudoTitle + "   " + kudoBody + "   " + kudoRecipient + "   " + loggedInUserId);
     $.when(ajaxGiveKudos().done(function(a1) {
         $('.modal2').hide();
+        location.reload();
     }))
 })
 
@@ -80,7 +81,7 @@ $('#btnLogin').on('click', function () {
                 $.when(ajaxGetKudos().done(function (a2) {
                     $('.kudosDiv').html(theKudosHtml);
                     $('.btnGiveKudos').show();
-                    $('#loginReturn').show();
+                    $('.loginReturn').show();
                 }))
             } else {
                 $('.errMsg').html(welcomeHtml);
@@ -104,7 +105,8 @@ $('#btnSignUp').on('click', function () {
                 $.when(ajaxSignup()).done(function (a2) {
                     $('.welcome').html(welcomeHtml);
                     $('.modal').hide();
-                    $('.intro').hide();
+                    $('.intro').show();
+                    $('.welcome').show();
                 })
             }
         })

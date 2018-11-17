@@ -23,7 +23,7 @@ button:hover {
     opacity: 0.8;
 }
 
-.login, .btnGiveKudos {
+.login, .btnGiveKudos, .loginReturn {
     width:auto;
 }
 
@@ -85,6 +85,8 @@ span.psw {
 .btnGiveKudos {
     display: none;
 }
+
+
 
 .modal2 {
     display:none;
