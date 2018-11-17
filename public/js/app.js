@@ -8,25 +8,31 @@ var theKudosHtml = '';
 var userHtml = '';
 var loggedInUserId = '';
 
+
 $('.loginReturn').hide();
 
+// Show modal for user to sign up or login on click of the login/signup button
 $('.login').on('click', function () {
     $('.modal').show();
 })
 
+// Close model if user clicks on cancel button inside of modal
 $('#btnCancel, #btnCancel2').on('click', function () {
     $('.modal, .modal2').hide();
 })
 
+// Close model if user clicks on the x button inside of modal
 $('.close').on('click', function () {
     $('.modal, .modal2').hide();
 })
 
+// Show login screen again if user 
 $('.loginReturn').on('click', function() {
     $('.modal').show();
 })
 
-
+// Show the modal that handles the give kudos functionality while 
+// populating neccessary html elements inside of modal
 $('.btnGiveKudos').on('click', function () {
     $.when(ajaxGetUsers().done(function (a1) {
         $('.receiverDiv').html(userHtml);
@@ -34,18 +40,18 @@ $('.btnGiveKudos').on('click', function () {
     $('.modal2').show();
 })
 
+// On click of give kudo button in modal, grab the vals of the kudo nesesscary, 
+// post kudos to db and hide open modal
 $('#btnGiveKudo2').on('click', function () {
     kudoTitle = $('#kudo-title').val();
     kudoBody = $('#kudo-body').val();
     kudoRecipient = $('.receiver').find('option:selected').val();
-    console.log(kudoTitle + "   " + kudoBody + "   " + kudoRecipient + "   " + loggedInUserId);
     $.when(ajaxGiveKudos().done(function(a1) {
         $('.modal2').hide();
-        location.reload();
     }))
 })
 
-
+// Call back end to get users
 function ajaxGetUsers() {
     return $.ajax({
         type: "GET",
@@ -55,6 +61,7 @@ function ajaxGetUsers() {
     });
 }
 
+// Populate 'select reciever' html element with existing users in the db
 function getUsers(response) {
     userHtml = `<select class="w3-select w3-border w3-animate-zoom receiver">`;
     userHtml += `<option value="" disabled selected>Select Receiver</option>`;
@@ -115,7 +122,7 @@ $('#btnSignUp').on('click', function () {
     }
 })
 
-
+// Call back end to post kudos to db
 function ajaxGiveKudos() {
     return $.ajax({
         type: "POST",
@@ -148,7 +155,7 @@ function getLogin(response) {
     }
 }
 
-
+// Call backend to sign up a user
 function ajaxSignup() {
     return $.ajax({
         type: "POST",
@@ -158,6 +165,7 @@ function ajaxSignup() {
     });
 }
 
+// If signup is successful, populate welcome html div and set loggedIn variable to true
 function signup(response) {
     if (response.success) {
         welcomeHtml = `<h2>Welcome ${uname}</h2>`;
@@ -177,6 +185,7 @@ function ajaxDoesUserExist() {
     });
 }
 
+// Checks to see if a user currently exists in the db, if so, inform user
 function doesUserExist(response) {
     userExists = response.success;
     if (userExists) {
@@ -184,6 +193,7 @@ function doesUserExist(response) {
     }
 }
 
+// Call back end to get kudos from db
 function ajaxGetKudos() {
     return $.ajax({
         type: "GET",
@@ -193,6 +203,7 @@ function ajaxGetKudos() {
     });
 }
 
+// Populate html element that handles the kudos from db with kudos from db 
 function getKudos(response) {
     theKudosHtml = '';
     for (let i = 0; i < response.length; i++) {
@@ -205,7 +216,7 @@ function getKudos(response) {
     return theKudosHtml;
 }
 
-
+// Check to see if a user entered a user and pw, if not, inform them
 function validateForm() {
     let retVal = false;
     if (($('#uname').val() && $('#psw').val())) {
