@@ -20,6 +20,10 @@ $('.close').on('click', function () {
     $('.modal, .modal2').hide();
 })
 
+$('$loginReturn').on('click', function() {
+    
+})
+
 
 $('.btnGiveKudos').on('click', function () {
     $.when(ajaxGetUsers().done(function (a1) {
@@ -76,6 +80,7 @@ $('#btnLogin').on('click', function () {
                 $.when(ajaxGetKudos().done(function (a2) {
                     $('.kudosDiv').html(theKudosHtml);
                     $('.btnGiveKudos').show();
+                    $('#loginReturn').show();
                 }))
             } else {
                 $('.errMsg').html(welcomeHtml);
@@ -113,13 +118,8 @@ function ajaxGiveKudos() {
     return $.ajax({
         type: "POST",
         url: `/api/kudos/${kudoTitle}&${kudoBody}&${loggedInUserId}&${kudoRecipient}`,
-        datatype: "json",
-        success: giveKudos,
+        datatype: "json"
     });
-}
-
-function giveKudos(response) {
-
 }
 
 // Call the back end to authenticate user
