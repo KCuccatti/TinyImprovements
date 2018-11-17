@@ -26,10 +26,7 @@ $('.close').on('click', function () {
     $('.modal, .modal2').hide();
 })
 
-// Show login screen again if user 
-$('.loginReturn').on('click', function() {
-    $('.modal').show();
-})
+
 
 // Show the modal that handles the give kudos functionality while 
 // populating neccessary html elements inside of modal
@@ -39,6 +36,13 @@ $('.btnGiveKudos').on('click', function () {
     }));
     $('.modal2').show();
 })
+
+
+// Show login screen again if user 
+$('.loginReturn').on('click', function() {
+    $('.modal').show();
+})
+
 
 // On click of give kudo button in modal, grab the vals of the kudo nesesscary, 
 // post kudos to db and hide open modal
@@ -50,28 +54,6 @@ $('#btnGiveKudo2').on('click', function () {
         $('.modal2').hide();
     }))
 })
-
-// Call back end to get users
-function ajaxGetUsers() {
-    return $.ajax({
-        type: "GET",
-        url: `/api/users`,
-        datatype: "json",
-        success: getUsers,
-    });
-}
-
-// Populate 'select reciever' html element with existing users in the db
-function getUsers(response) {
-    userHtml = `<select class="w3-select w3-border w3-animate-zoom receiver">`;
-    userHtml += `<option value="" disabled selected>Select Receiver</option>`;
-    for (let i = 0; i < response.length; i++) {
-        if (!(response[i].username === uname)) {
-            userHtml += `<option class="w3-bar-item w3-button" value="${response[i]._id}">${response[i].username}</option>`;
-        }
-    }
-    userHtml += `</select>`;
-}
 
 
 // On click of the login button, store values of uname and psw inputs, 
@@ -110,10 +92,14 @@ $('#btnSignUp').on('click', function () {
             } else {
                 psw = $('#psw').val();
                 $.when(ajaxSignup()).done(function (a2) {
-                    $('.welcome').html(welcomeHtml);
-                    $('.modal').hide();
-                    $('.intro').show();
-                    $('.welcome').show();
+                    $.when(ajaxGetKudos().done(function(a3) {
+                        alert('hello');
+                        $('.welcome').html(welcomeHtml);
+                        $('.modal').hide();
+                        $('.intro').hide();
+                        $('.welcome').show();
+                        $('.kudosDiv').html(theKudosHtml);
+                    }))
                 })
             }
         })
@@ -121,6 +107,29 @@ $('#btnSignUp').on('click', function () {
         $('.errMsg').html(signInErrorHtml);
     }
 })
+
+// Call back end to get users
+function ajaxGetUsers() {
+    return $.ajax({
+        type: "GET",
+        url: `/api/users`,
+        datatype: "json",
+        success: getUsers,
+    });
+}
+
+// Populate 'select reciever' html element with existing users in the db
+function getUsers(response) {
+    userHtml = `<select class="w3-select w3-border w3-animate-zoom receiver">`;
+    userHtml += `<option value="" disabled selected>Select Receiver</option>`;
+    for (let i = 0; i < response.length; i++) {
+        if (!(response[i].username === uname)) {
+            userHtml += `<option class="w3-bar-item w3-button" value="${response[i]._id}">${response[i].username}</option>`;
+        }
+    }
+    userHtml += `</select>`;
+}
+
 
 // Call back end to post kudos to db
 function ajaxGiveKudos() {

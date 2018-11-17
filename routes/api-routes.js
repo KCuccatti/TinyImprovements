@@ -17,7 +17,6 @@ module.exports = function (app) {
   app.get('/api/kudos', function (req, res) {
     db.Kudos.find({}, 'title body fromUserId toUserId').populate("fromUserId").populate("toUserId").then(function (kudos, err) {
       if (!err && kudos.length > 0) {
-        console.log(kudos);
         res.json(kudos);
       } else {
         console.log("No Kudos Found");
@@ -54,7 +53,6 @@ module.exports = function (app) {
   app.post('/api/user/:uname&:psw', function (req, res) {
     db.User.create({ username: req.params.uname, password: req.params.psw })
       .then(function (data) {
-        console.log(data);
         res.json({ success: true });
       })
       .catch(function (err) {
